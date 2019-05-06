@@ -4,11 +4,12 @@
 #include<set>
 
 using namespace std;
+class Error{};
 
 int func(int k, set<string>& ends, multiset<char>& bfw, string word);
 
 int main()
-{
+try{
 	bool endWork = false;
 	while (!endWork)
 	{
@@ -21,6 +22,7 @@ int main()
 
 			cout << "Enter \"k\"  min:1\tmax:" << bfw.size() << "\n";
 			cin >> k;
+			if (!cin) throw Error();
 			if ((k < 1) || (k > bfw.size()))
 			{
 				system("cls");
@@ -34,11 +36,22 @@ int main()
 		{
 			cout << *i << endl;
 		}
-		cout << "Repeat?\n1-Yes;\n2-No;\n";
+		int eX;
+		cout << "Repeat?\n0-No;\n";
+		cin >> eX;
+		if (!cin) throw Error();
+		if (eX == 0) endWork = true;
+
 	}
 	system("pause");
 	return 0;
 
+}
+catch (Error)
+{	
+	cout << "\tHandler\n";
+	cout << "Error typing in console\n";
+	cout << "Run the program again\n";
 }
 
 
